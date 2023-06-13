@@ -18,8 +18,8 @@ public class Demo {
         while (input < 1 || input > 8){
           System.out.print("Please choose a number from 1 to 8: ");
           input = scnr.nextInt();
-        }
-
+          }
+        
         switch (input){
           case 1:
             System.out.println();
@@ -33,7 +33,7 @@ public class Demo {
             break;
           case 3:
             System.out.println();
-            System.out.println(playlist);
+            printPlaylist(playlist);
             System.out.println();
             break;          
           case 4:
@@ -43,9 +43,25 @@ public class Demo {
             break;
           case 5:
             System.out.println();
-            removeSong(playlist);
+            removeCurrSong(playlist);
             System.out.println();
-          
+            break;
+          case 6:
+            System.out.println();
+            skipToNext(playlist);
+            System.out.println();
+            break;
+          case 7:
+            System.out.println();
+            returnToPrevious(playlist);
+            System.out.println();
+            break;
+          case 8:
+            System.out.println();
+            System.out.println("Exiting...");
+            System.out.println();
+          default:
+            break;
         }
       } while (input != 8);
     }
@@ -85,51 +101,93 @@ public class Demo {
         currentSong = song;
     }
 
-    System.out.println("Song added to the playlist.");    
+    System.out.println("\nSong added to the playlist.");    
   }
 
   public static void addAfterCurr (Scanner scnr, Playlist playlist){
     if (currentSong == null) {
-      System.out.println("There is no currently playing song, add one first.");
-    }
+      addSongToPlaylist(scnr, playlist);
+    } else {
+      // Read song details from the user
+      scnr.nextLine(); 
+      System.out.print("Enter the song name: ");
+      String name = scnr.nextLine();
+      System.out.print("Enter the artist: ");
+      String artist = scnr.nextLine();
+      System.out.print("Enter the album: ");
+      String album = scnr.nextLine();
+      System.out.print("Enter the length (in seconds): ");
+      int length = scnr.nextInt();
 
-    // Read song details from the user
-    scnr.nextLine(); 
-    System.out.print("Enter the song name: ");
-    String name = scnr.nextLine();
-    System.out.print("Enter the artist: ");
-    String artist = scnr.nextLine();
-    System.out.print("Enter the album: ");
-    String album = scnr.nextLine();
-    System.out.print("Enter the length (in seconds): ");
-    int length = scnr.nextInt();
+      // Create a new Song object
+      Song song = new Song(name, artist, album, length);
 
-    // Create a new Song object
-    Song song = new Song(name, artist, album, length);
+      playlist.insertAfterCurrent(song, currentSong);
 
-    playlist.insertAfterCurrent(song, currentSong);
-
-    System.out.println("Song inserted into the playlist.");
+      System.out.println("\nSong inserted into the playlist.");
+      }
   }
 
   public static void getCurrSong (Playlist playlist) {
     if (currentSong == null) {
       System.out.println("There is no currently playing song, add one first.");
-    }
-    System.out.println("Currently playing song:");
-    System.out.println("Name: " + currentSong.getName());
-    System.out.println("Artist: " + currentSong.getArtist());
-    System.out.println("Album: " + currentSong.getAlbum());
-    System.out.println("Length: " + currentSong.getLength() + " seconds");
-    
+    } else {
+      System.out.println("Currently playing song:");
+      System.out.println("Name: " + currentSong.getName());
+      System.out.println("Artist: " + currentSong.getArtist());
+      System.out.println("Album: " + currentSong.getAlbum());
+      System.out.println("Length: " + currentSong.getLength() + " seconds");
+      }
 }
 
-  public static void removeSong (Playlist playlist){
+  public static void removeCurrSong (Playlist playlist){
     if (currentSong == null) {
       System.out.println("There is no currently playing song, add one first.");
     }
-    playlist.removeSong(currentSong);
-    currentSong = currentSong.getNext();
-    System.out.println("Current song removed from the playlist.");
+    else if (currentSong.getNext() == playlist.getTail() && currentSong.getPrevious() == playlist.getHead()){
+      playlist.removeSong(playlist.getHead().getNext());
+      System.out.println("Current song removed, now the playlist is empty");
+      currentSong = null;  
+    } else {
+      playlist.removeSong(currentSong);
+      if (currentSong.getNext() != playlist.getTail()){
+      currentSong = currentSong.getNext();
+      } else {
+        currentSong = currentSong.getPrevious();
+      }
+      System.out.println("Current song removed from the playlist.");
+      }
+  }
+
+  public static void printPlaylist (Playlist playlist){
+    if (currentSong == null) {
+      System.out.println("The playlist is empty, add a song first.");
+    } else {
+      System.out.println(playlist);
+    }
+  }
+
+  public static void skipToNext (Playlist playlist){
+    if (currentSong == null) {
+        System.out.println("The playlist is empty, add a song first.");
+      } 
+      else if (currentSong.getNext() == playlist.getTail()){
+        System.out.println("There is any song next in the playlist");
+      } else {
+          currentSong = currentSong.getNext();
+          System.out.println("Skiped to " + currentSong.getName());
+        }
+  }
+
+  public static void returnToPrevious (Playlist playlist){
+    if (currentSong == null) {
+      System.out.println("The playlist is empty, add a song first.");
+    } 
+    else if (currentSong.getPrevious() == playlist.getHead()){
+      System.out.println("There is any previous song in the playlist");
+    } else {
+        currentSong = currentSong.getPrevious();
+        System.out.println("Returned to " + currentSong.getName());
+      }
   }
 }

@@ -52,8 +52,12 @@ public class Playlist {
         totalDuration += newSong.getLength();
     }
 
-    public Song getFirstSong() {
-        return head.getNext();
+    public Song getHead() {
+        return head;
+    }
+
+    public Song getTail() {
+        return tail;
     }
 
     public void removeSong(Song song){
