@@ -2,6 +2,7 @@
  * This class represents songs objects
  */
 public class Song {
+    //Declare all the variables.
     private String name, artist, album;
     private int length;
     private Song next, previous;
@@ -126,10 +127,5 @@ public class Song {
      */
     public Song getPrevious (){
         return previous;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
