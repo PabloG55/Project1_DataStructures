@@ -188,11 +188,13 @@ public class Demo {
         playlist.removeSong(currentSong);
         //If the current song is not the last, set the current song the next one. 
         if (currentSong.getNext() != playlist.getTail()){
-        currentSong = currentSong.getNext();
+          System.out.println(currentSong.getName() + " was removed, removed from the playlist.");
+          currentSong = currentSong.getNext();
         } else { //If it is the last, set the current song the previous one.
-          currentSong = currentSong.getPrevious();
-        }
-        System.out.println(currentSong.getName() + " was removed, removed from the playlist.");
+            System.out.println(currentSong.getName() + " was removed, removed from the playlist.");
+            currentSong = currentSong.getPrevious();
+          }
+        
         }
   }
 
