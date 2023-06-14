@@ -1,10 +1,14 @@
+/**
+ * Pablo Garces, 06/18/2023,
+ * This class represent an implementation of the Playlist and Song classes.
+ */
 import java.util.Scanner;
 
 public class Demo { 
     //Create a current song object.
     public static Song currentSong; 
     public static void main (String[]args){
-      //Declare input variable.
+      //Declare input variable and initialize current song variable.
       int input; 
       Song currentSong = null;
       //Declare the constants.

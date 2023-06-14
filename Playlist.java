@@ -1,10 +1,11 @@
 /**
+ * Pablo Garces, 06/18/2023,
  * This class represents a music Playlist.
  */
 public class Playlist {
     //Declare all the variables.
-    private Song head, tail;
-    private int size, totalDuration;
+    private Song head, tail; //Dummy nodes head and tail.
+    private int size, totalDuration; //Playlist size and total duration.
     
     /**
      * Constructor that accpets arguments.
