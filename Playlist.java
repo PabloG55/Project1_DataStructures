@@ -8,7 +8,7 @@ public class Playlist {
     private int size, totalDuration; //Playlist size and total duration.
     
     /**
-     * Constructor that accpets arguments.
+     * No-arg constructor that explicitly initializes all instance fields.
      */
     public Playlist (){
         head = new Song();//Set dummy nodes.

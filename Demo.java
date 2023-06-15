@@ -10,10 +10,11 @@ public class Demo {
     public static void main (String[]args){
       //Declare input variable and initialize current song variable.
       int input; 
-      Song currentSong = null;
+
       //Declare the constants.
-      final int MIN_NUMBER = 1;
-      final int MAX_NUMBER = 8;
+      final int MIN_INPUT = 1;
+      final int MAX_INPUT = 8;
+
       //Create a Scanner object used to read input from the console.
       Scanner scnr = new Scanner(System.in);
 
@@ -27,12 +28,12 @@ public class Demo {
         input = scnr.nextInt();
 
         //Validate the input.
-        while (input < MIN_NUMBER || input > MAX_NUMBER){
+        while (input < MIN_INPUT || input > MAX_INPUT){
           System.out.print("Please choose a number from 1 to 8: ");
           input = scnr.nextInt();
           }
         
-        //Create all the options.
+        //Create all the menu options.
         switch (input){
           case 1:
             System.out.println();
@@ -77,7 +78,7 @@ public class Demo {
           default:
             break;
         }
-      } while (input != MAX_NUMBER);
+      } while (input != MAX_INPUT);
     }
 
   /**
@@ -124,7 +125,7 @@ public class Demo {
         currentSong = song;
     }
 
-    System.out.println("\nSong added to the playlist.");    
+    System.out.println("\n" + song.getName() +" added to the playlist.");    
   }
 
   /**
@@ -153,7 +154,8 @@ public class Demo {
 
       playlist.insertAfterCurrent(song, currentSong);
 
-      System.out.println("\nSong inserted into the playlist.");
+      System.out.println("\n" + song.getName() +" added to the playlist.");
+       
       }
   }
 
@@ -179,23 +181,26 @@ public class Demo {
    * @param playlist
    */
   public static void removeCurrSong (Playlist playlist){
+    //Declare song objects.
+    Song tail = playlist.getTail();
+    Song head = playlist.getHead();
     //If there is no current song, print an Error.
     if (currentSong == null) {
       System.out.println("There is no currently playing song, add one first.");
     }
     //If the curent song is the only one in the playlist remove it put the playlist as empty.
-    else if (currentSong.getNext() == playlist.getTail() && currentSong.getPrevious() == playlist.getHead()){
-      playlist.removeSong(playlist.getHead().getNext());
+    else if (currentSong.getNext() == tail && currentSong.getPrevious() == head){
+      playlist.removeSong(head.getNext());
       System.out.println(currentSong.getName() + " was removed, now the playlist is empty");
       currentSong = null;  
     } else { //If not just remove the song.
         playlist.removeSong(currentSong);
         //If the current song is not the last, set the current song the next one. 
-        if (currentSong.getNext() != playlist.getTail()){
-          System.out.println(currentSong.getName() + " was removed, removed from the playlist.");
+        if (currentSong.getNext() != tail){
+          System.out.println(currentSong.getName() + " was removed from the playlist.");
           currentSong = currentSong.getNext();
         } else { //If it is the last, set the current song the previous one.
-            System.out.println(currentSong.getName() + " was removed, removed from the playlist.");
+            System.out.println(currentSong.getName() + " was removed from the playlist.");
             currentSong = currentSong.getPrevious();
           }
         

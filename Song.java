@@ -13,13 +13,13 @@ public class Song {
      * @param name
      * @param artist
      * @param album
-     * @param lenght
+     * @param length
      */
-    public Song (String name, String artist, String album, int lenght){
+    public Song (String name, String artist, String album, int length){
         this.name = name;
         this.artist = artist;
         this.album = album;
-        this.length = lenght;
+        this.length = length;
         this.next = null;
         this.previous = null;
     }
