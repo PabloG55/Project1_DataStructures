@@ -231,7 +231,7 @@ public class Demo {
       }
       //If it is the last song in the playlist, print an Error. 
       else if (currentSong.getNext() == playlist.getTail()){
-        System.out.println("There is any song next in the playlist");
+        System.out.println("The playlist doesn't have a next song. ");
       } else { //If there is a next song in the playlisyt skip it to the next one.
           currentSong = currentSong.getNext();
           System.out.println("Skiped to " + currentSong.getName());
@@ -249,7 +249,7 @@ public class Demo {
     }
     //If there is not a previous song in the playlist, print an error.
     else if (currentSong.getPrevious() == playlist.getHead()){
-      System.out.println("There is any previous song in the playlist");
+      System.out.println("The playlist doesn't have a previous song. ");
     } else { //If there is a previous song in the playlist return to it.
         currentSong = currentSong.getPrevious();
         System.out.println("Returned to " + currentSong.getName());
