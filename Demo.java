@@ -1,6 +1,6 @@
 /**
  * Pablo Garces, 06/18/2023,
- * This class represent an implementation of the Playlist and Song classes.
+ * This class represent an implementation of the Playlist and Song classes
  */
 import java.util.Scanner;
 

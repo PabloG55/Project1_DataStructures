@@ -1,6 +1,6 @@
 /**
  * Pablo Garces, 06/18/2023,
- * This class represents a music Playlist.
+ * This class represents a music Playlist
  */
 public class Playlist {
     //Declare all the variables.
